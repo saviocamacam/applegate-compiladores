@@ -7,13 +7,15 @@ inteiro principal()
 	inteiro: somador
 	somador := 0
 	valor : = 0
+	flutuante: valor2 %
+	valor2 := 1.54334E-34
 
 	repita
 		leia(valor)
 		vetor[i] = valor
 
-		i := i + 1
-	ate i = tamanho_vetor
+		i := i + 1 {
+	até i = tamanho_vetor
 
 	leia(valor)
 
