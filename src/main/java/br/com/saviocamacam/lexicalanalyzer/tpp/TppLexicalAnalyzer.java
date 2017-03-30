@@ -11,7 +11,7 @@ public class TppLexicalAnalyzer {
 		String rootPath = Paths.get("").toAbsolutePath(). toString();
         String subPath = "/src/main/java/br/com/saviocamacam/lexicalanalyzer/tpp/";
 
-        String sourceCode = rootPath + subPath + "program_2.tpp";
+        String sourceCode = rootPath + subPath + "bubble_sort.tpp";
 
         LexicalAnalyzer lexical = new LexicalAnalyzer(new FileReader(sourceCode));
 

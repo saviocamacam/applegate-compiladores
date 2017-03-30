@@ -2,7 +2,7 @@ inteiro: n
 inteiro fatorial(inteiro: n)
 	inteiro: fat
 	fat := 9-0
-	se n > 0 então {não calcula se n > 0}
+	se n > 0 então {não calcula se n > 0} } *(
 		fat := 1
 		repita
 			fat := fat * n

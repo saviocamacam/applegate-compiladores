@@ -19,30 +19,25 @@ private TppToken createToken(String name, String value) {
 %line
 %column
 
-PR = (se|então|senão|fim|repita|flutuante|retorna|até|leia|escreve|inteiro)
+PR = (se|então|senão|fim|repita|flutuante|retorna|até|leia|escreva|inteiro)
 DIGITO = [0-9]
-SIGNAL = [-+]
-INTEIRO = ({SIGNAL}?{DIGITO}+)
-FLUTUANTE = {INTEIRO}+[.]{DIGITO}+
-NUMBER_SN = {SIGNAL}?{DIGITO}*\.?{DIGITO}+([eE]{SIGNAL}?{DIGITO}+)
-LETRA = [a-zA-Zãõáéíóúâêôûüç_]
+LETRA = [a-zA-ZÃÕÂÊÁÉÔÍÓÚÇãõáéíóúâêôûüç\_]
 ID = {LETRA}({LETRA}|{DIGITO})*
+NUMERO = [0-9]*\.?[0-9]+([eE][-+][0-9]+)?
 BRANCO = [\n| |\t|\r]+
-SB = (:=|:|>|\(|\)|\*|=|\-|\+|<=|\[|\])
-CT = \{(.|[\r\n])*?\}+
-ERROR = [\x20-\x7F]
+SB = (:=|:|>|<|\(|\)|\*|=|\-|\+|\/|<=|>=|\[|\])
+CT = \{[^}]*\}
+ERROR_CT = [{}]
+ERROR = .
 
 %%
-
-{DIGITO} {return createToken("DIG", yytext()); }
 {PR} { return createToken("PR", yytext()); }
 {ID} { return createToken("ID", yytext()); }
 {SB} { return createToken("SB", yytext()); }
 {BRANCO} { /**/ }
-{INTEIRO} { return createToken("NUM", yytext()); }
-{NUMBER_SN} {return createToken("SN", yytext()); }
-{FLUTUANTE} {return createToken("NUM", yytext()); }
-{ERROR} {System.out.println("Caractere ou sequência inválidos." + " -> " + yytext());}
+{NUMERO} {return createToken("NUM", yytext()); }
+{ERROR_CT} {System.out.println("Erro com comentário" + " na linha " + yyline + ", coluna " +yycolumn); }
+{ERROR} {System.out.println("Caractere inválido " + yytext() + " na linha " + yyline + ", coluna " +yycolumn);}
 {CT} { /**/ }
 
 . { throw new RuntimeException("Caractere inválido " + yytext() + " na linha " + yyline + ", coluna " +yycolumn); }
